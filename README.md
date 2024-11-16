@@ -1,50 +1,75 @@
 # Welcome to your Expo app 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Get started
 
-1. Install dependencies
+## Paquetes instalados
 
-   ```bash
-   npm install
-   ```
+- https://www.nativewind.dev/
 
-2. Start the app
 
-   ```bash
-    npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
+## Configuracion de Nativewind
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1  - Instalar paquetes
+   `yarn add nativewind tailwindcss react-native-reanimated react-native-safe-area-context`
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2 - Run `npx tailwindcss init`  to create a `tailwind.config.js` file
 
-## Get a fresh project
+3 - Agregar esta lineas en el archivo `tailwind.config.js`
+   ` content: [
+    "./app/**/*.{js,jsx,ts,tsx}",
+    "./components/**/*.{js,jsx,ts,tsx}",
+    "./presentation/**/*.{js,jsx,ts,tsx}",
+  ],
+  presets: [require("nativewind/preset")],`
 
-When you're ready, run:
+4 - Crear el archivo `global.css`, dentro de la carpeta app y copiamos lo siguiente:
+   `@tailwind base;
+   @tailwind components;
+   @tailwind utilities;`
 
-```bash
-npm run reset-project
-```
+5 - No me salio el archivo babel.config.js al crear el proyecto, lo agrego manualmente:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+`module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [
+      ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+      "nativewind/babel",
+    ],
+  };
+};`
 
-## Learn more
+6 - Crear el archivo `metro.config.js` ejecutando el comando `npx expo customize metro.config.js`
 
-To learn more about developing your project with Expo, look at the following resources:
+   y agregamos esto:
+   `
+   const { getDefaultConfig } = require("expo/metro-config");
+   const { withNativeWind } = require("nativewind/metro");
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+   const config = getDefaultConfig(__dirname);
 
-## Join the community
+   module.exports = withNativeWind(config, { input: "./app/global.css" });
+   `
+7 - Creamos el archivo `_layout.tsx`, dentro de la carpeta `app`
 
-Join our community of developers creating universal apps.
+   `
+      import { View, Text } from 'react-native'
+      import React from 'react'
+      import { Slot } from "expo-router";
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+      import './global.css';
+
+      const RootLayout = () => {
+      return (
+         <Slot />
+      )
+      }
+
+      export default RootLayout;
+   `tsx
+
+8 - Creamos el archivo `nativewind-env.d.ts` y agregamos esto:
+   `/// <reference types="nativewind/types" />`
+
+
