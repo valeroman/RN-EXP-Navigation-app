@@ -133,3 +133,19 @@ const RootLayout = () => {
 
 export default RootLayout;
 ```
+
+## Configurar colores
+
+- Agregamos en el archivo `tailwind.config.js`, lo siguiente:
+
+```js
+colors: {
+   primary: '#49129C',
+   secondary: {
+      DEFAULT: '#B40086',
+      100: '#C51297',
+      200: '#831266'
+   },
+   tertiary: '#EF2967'
+},
+```
