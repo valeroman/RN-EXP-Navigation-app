@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Slot, SplashScreen } from "expo-router";
+import { Slot, SplashScreen, Stack } from "expo-router";
 
 import './global.css';
 import { useFonts } from 'expo-font';
@@ -27,6 +27,7 @@ const RootLayout = () => {
 
   return (
     <Slot />
+    // <Stack />
   )
 }
 
