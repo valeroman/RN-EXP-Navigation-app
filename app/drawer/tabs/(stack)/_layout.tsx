@@ -17,28 +17,28 @@ const StackLayout = () => {
             <Stack.Screen
                 name='home/index'
                 options={{
-                    title: "Home Screen"
+                    title: "Inicio"
                 }}
             />
 
             <Stack.Screen
                 name='products/index'
                 options={{
-                    title: "Products Screen"
+                    title: "Products"
                 }}
             />
 
             <Stack.Screen
                 name='profile/index'
                 options={{
-                    title: "Profile Screen"
+                    title: "Profile"
                 }}
             />
 
             <Stack.Screen
                 name='settings/index'
                 options={{
-                    title: "Settings Screen"
+                    title: "Settings"
                 }}
             />
 
