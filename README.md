@@ -149,3 +149,53 @@ colors: {
    tertiary: '#EF2967'
 },
 ```
+
+## Instalar y Configurar Drawer
+
+- Documentacion: https://docs.expo.dev/router/advanced/drawer/
+
+- comando como uso yarn `yarn expo install @react-navigation/drawer react-native-gesture-handler react-native-reanimated`
+
+- En el `_layout.tsx`, principal dde mi aplicacion, agregamos lo siguiente
+
+```tsx
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
+return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Slot />
+    </GestureHandlerRootView>
+  )
+```
+
+- Creamos una carpeta dentro de `app`, llamada `drawer`, dentro de `drawer`, creamos el `_layout.tsx` y agregamos lo siguiente:
+
+```tsx
+import { Drawer } from 'expo-router/drawer';
+import React from 'react'
+
+const DrawerLayout = () => {
+  return (
+    <Drawer>
+        <Drawer.Screen
+          name="user/index"
+          options={{
+            drawerLabel: 'User',
+            title: 'Usuario',
+          }}
+        />
+        <Drawer.Screen
+          name="schedule/index"
+          options={{
+            drawerLabel: 'Horario',
+            title: 'Horario',
+          }}
+        />
+      </Drawer>
+  )
+}
+
+export default DrawerLayout;
+```
+
+- Y creamos las carpetas `user` y `schedule`, con sus respectivos `index.tsx`
